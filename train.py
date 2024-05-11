@@ -86,7 +86,7 @@ def run(args):
         save_top_k=1
     )
 
-    wandb.init(entity=args.wandb_entity, project=args.wandb_proj, name=args.wandb_run)
+    wandb.init(entity=args.ganyiwatakunda, project=args.capstoneproject, name=args.wandb_run)
     wandb_logger = pl_loggers.WandbLogger()
     wandb_logger.watch(model)
 
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     parser.add_argument('--data_folder', type=str, default='dataset/')
     parser.add_argument('--log_dir', type=str, default='log')
     parser.add_argument('--seed', type=int, default=21)
-    parser.add_argument('--epochs', type=int, default=200)
+    parser.add_argument('--epochs', type=int, default=30)
     parser.add_argument('--gpu_num', type=int, default=0)
 
     # Model specific arguments
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     parser.add_argument('--use_text', type=int, default=1)
     parser.add_argument('--trend_len', type=int, default=52)
     parser.add_argument('--num_trends', type=int, default=3)
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--batch_size', type=int, default=28)
     parser.add_argument('--embedding_dim', type=int, default=32)
     parser.add_argument('--hidden_dim', type=int, default=64)
     parser.add_argument('--output_dim', type=int, default=12)
@@ -130,9 +130,9 @@ if __name__ == '__main__':
     parser.add_argument('--num_hidden_layers', type=int, default=1)
 
     # wandb arguments
-    parser.add_argument('--wandb_entity', type=str, default='username-here')
-    parser.add_argument('--wandb_proj', type=str, default='GTM')
-    parser.add_argument('--wandb_run', type=str, default='Run1')
+    parser.add_argument('--ganyiwatakunda', type=str, default='ganyiwatakunda')
+    parser.add_argument('--capstoneproject', type=str, default='GTM')
+    parser.add_argument('--wandb_run', type=str, default='experiment4')
 
     args = parser.parse_args()
     run(args)
