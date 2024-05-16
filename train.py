@@ -90,9 +90,14 @@ def run(args):
     wandb_logger = pl_loggers.WandbLogger()
     wandb_logger.watch(model)
 
+    if torch.cuda.is_available():
+        accelerator = 'cuda'
+    else:
+        accelerator = 'cpu'
+
     # If you wish to use Tensorboard you can change the logger to:
     # tb_logger = pl_loggers.TensorBoardLogger(args.log_dir+'/', name=model_savename)
-    trainer = pl.Trainer(gpus=[args.gpu_num], max_epochs=args.epochs, check_val_every_n_epoch=5,
+    trainer = pl.Trainer( accelerator = 'cuda', max_epochs=args.epochs, check_val_every_n_epoch=5,
                          logger=wandb_logger, callbacks=[checkpoint_callback])
 
     # Fit model
@@ -107,7 +112,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Zero-shot sales forecasting')
 
     # General arguments
-    parser.add_argument('--data_folder', type=str, default='dataset/')
+    parser.add_argument('--data_folder', type=str, default='VISUELLE/')
     parser.add_argument('--log_dir', type=str, default='log')
     parser.add_argument('--seed', type=int, default=21)
     parser.add_argument('--epochs', type=int, default=30)
@@ -132,7 +137,7 @@ if __name__ == '__main__':
     # wandb arguments
     parser.add_argument('--ganyiwatakunda', type=str, default='ganyiwatakunda')
     parser.add_argument('--capstoneproject', type=str, default='GTM')
-    parser.add_argument('--wandb_run', type=str, default='experiment4')
+    parser.add_argument('--wandb_run', type=str, default='experiment2')
 
     args = parser.parse_args()
     run(args)
