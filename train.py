@@ -86,7 +86,7 @@ def run(args):
         save_top_k=1
     )
 
-    wandb.init(entity=args.ganyiwatakunda, project=args.capstoneproject, name=args.wandb_run)
+    wandb.init(entity=args.ganyiwatakunda, project=args.capstoneproject, name=args.wandb_run, resume=True)
     wandb_logger = pl_loggers.WandbLogger()
     wandb_logger.watch(model)
 
